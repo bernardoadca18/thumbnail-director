@@ -1,0 +1,29 @@
+services:
+  thumbnail-director:
+    build: .
+    image: neovids-thumbnail-director:local
+    restart: "no"
+    mem_limit: 1g
+    cpus: 2
+    ports: ["127.0.0.1:8014:8000"]
+    environment:
+      ARTIFACT_ROOT: /data/thumbnails
+      MEDIA_INDEXER_API_URL: http://media-indexer:8000
+      NINEROUTER_BASE_URL: ${NINEROUTER_BASE_URL:-http://9router:20128}
+      NINEROUTER_API_KEY: ${NINEROUTER_API_KEY:-}
+      THUMBNAIL_LLM_MODEL: ${THUMBNAIL_LLM_MODEL:-neovids-standard}
+    volumes: ["thumbnail-artifacts:/data/thumbnails"]
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health/ready', timeout=3)"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+    networks:
+      neovids:
+        aliases: [thumbnail-director]
+volumes:
+  thumbnail-artifacts:
+networks:
+  neovids:
+    name: ${NEOVIDS_NETWORK:-neovids}
+    external: true

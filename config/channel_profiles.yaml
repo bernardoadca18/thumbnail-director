@@ -1,0 +1,14 @@
+seis_estrelas_pt_v1:
+  version: 1
+  locale: pt-BR
+  canvas: {width: 1280, height: 720}
+  text: {max_words: 5, max_lines: 2, font: DejaVu Sans Bold, min_size: 38, max_size: 88}
+  accent: '#ffcf33'
+  templates: [split_compare_v1, hero_focus_v1, curiosity_focus_v1]
+six_stars_en_v1:
+  version: 1
+  locale: en-US
+  canvas: {width: 1280, height: 720}
+  text: {max_words: 5, max_lines: 2, font: DejaVu Sans Bold, min_size: 38, max_size: 88}
+  accent: '#ffcf33'
+  templates: [split_compare_v1, hero_focus_v1, curiosity_focus_v1]
